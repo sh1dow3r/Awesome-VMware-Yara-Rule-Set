@@ -1,0 +1,73 @@
+rule UtilityFiles {
+    meta:
+        description = "Detect utility scripts related to potential UNC3886 activity"
+        author = "sh1dow3r"
+        reference = "https://cloud.google.com/blog/topics/threat-intelligence/uncovering-unc3886-espionage-operations"
+    condition:
+        hash.md5(0, filesize) == "381b7a2a6d581e3482c829bfb542a7de" or // gl.py
+        hash.md5(0, filesize) == "129ba90886c5f5eb0c81d901ad10c622" or // sendPacket.py
+        hash.md5(0, filesize) == "0f76936e237bd87dfa2378106099a673" or // sendPacket.py
+        hash.md5(0, filesize) == "d18a5f1e8c321472a31c27f4985834a4" or // u.py
+        hash.md5(0, filesize) == "9c428a35d9fc1fdaf31af186ff6eec08"    // ndc4961
+}
+
+rule ArchiveFiles {
+    meta:
+        description = "Detect archive files related to UNC3886 activity"
+        author = "sh1dow3r"
+        reference = "https://cloud.google.com/blog/topics/threat-intelligence/uncovering-unc3886-espionage-operations"
+    condition:
+        hash.md5(0, filesize) == "827d8ae502e3a4d56e6c3a238ba855a7" or // lsuv2_nv.v01
+        hash.md5(0, filesize) == "9ea86dccd5bbde47f8641b62a1eeff07" or // payload1.v00
+        hash.md5(0, filesize) == "fcb742b507e3c074da5524d1a7c80f7f" or // rdt
+        hash.md5(0, filesize) == "2716c60c28cf7f7568f55ac33313468b" or // lsu_lsi_.v05
+        hash.md5(0, filesize) == "62bed88bd426f91ddbbbcfcd8508ed6a"    // payload1
+}
+
+rule BackdoorFiles {
+    meta:
+        description = "Detect backdoor files related to UNC3886 and other campaigns"
+        author = "sh1dow3r"
+        reference = "https://cloud.google.com/blog/topics/threat-intelligence/uncovering-unc3886-espionage-operations"
+    condition:
+        hash.md5(0, filesize) == "89339821cdf6e9297000f3e6949f0404" or // ksbubba
+        hash.md5(0, filesize) == "c870ea6a598c12218e6ac36d791032b5" or // ksbubba.service
+        hash.md5(0, filesize) == "4d5e4f64a9b56067704a977ed89aa641" or // bubba
+        hash.md5(0, filesize) == "c9c00c627015bd78fda22fa28fd11cd7" or // bubba_reverse
+        hash.md5(0, filesize) == "bd6e38b6ff85ab02c1a4325e8af29ce4"    // vmware_local.sh
+}
+
+rule NetworkIndicators {
+    meta:
+        description = "Detect network-based indicators associated with UNC3886"
+        author = "sh1dow3r"
+        reference = "https://cloud.google.com/blog/topics/threat-intelligence/uncovering-unc3886-espionage-operations"
+    strings:
+        $ip1 = "8.222.218.20"
+        $ip2 = "8.222.216.144"
+        $ip3 = "45.77.106.183"
+        $ip4 = "152.32.129.162"
+        $ip5 = "118.193.61.71"
+    condition:
+        any of them
+}
+
+rule InstallerScripts {
+    meta:
+        description = "Detect installer scripts for UNC3886 activities"
+        author = "sh1dow3r"
+        reference = "https://cloud.google.com/blog/topics/threat-intelligence/uncovering-unc3886-espionage-operations"
+    condition:
+        hash.md5(0, filesize) == "876787f76867ecf654019bd19409c5b8" // install-20220615.py
+}
+
+rule ReptileFamilyIndicators {
+    meta:
+        description = "Detect Reptile malware family indicators"
+        author = "sh1dow3r"
+        reference = "https://cloud.google.com/blog/topics/threat-intelligence/uncovering-unc3886-espionage-operations"
+    condition:
+        hash.md5(0, filesize) == "1079d416e093ba40aa9e95a4c2a5b61f" or // 99-bubba.rules
+        hash.md5(0, filesize) == "4fb72d580241f27945ec187855efd84a" or // listener
+        hash.md5(0, filesize) == "e2cdf2a3380d0197aa11ff98a34cc59e"    // packet
+}
