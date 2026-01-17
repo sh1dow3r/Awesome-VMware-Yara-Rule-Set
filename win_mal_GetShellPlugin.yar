@@ -2,7 +2,8 @@ rule GetShellPlugin {
     meta:
         author = "RussianPanda"
         description = "Detects GetShell Plugin (client)"
-		hash = "4614346fc1ff74f057d189db45aa7dc25d6e7f3d9b68c287a409a53c86dca25e"
+	reference = "https://www.huntress.com/blog/esxi-vm-escape-exploit"
+	hash = "4614346fc1ff74f057d189db45aa7dc25d6e7f3d9b68c287a409a53c86dca25e"
         date = "12/31/2025"
     strings:
         $s1 = "InfDefaultInstall.exe .\\vsock.inf"

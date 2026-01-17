@@ -2,6 +2,7 @@ rule MAESTRO {
     meta:
         author = "RussianPanda"
         description = "Detects MAESTRO payload"
+	reference = "https://www.huntress.com/blog/esxi-vm-escape-exploit"
         hash = "37972a232ac6d8c402ac4531430967c1fd458b74a52d6d1990688d88956791a7"
         date = "12/31/2025"
     strings:

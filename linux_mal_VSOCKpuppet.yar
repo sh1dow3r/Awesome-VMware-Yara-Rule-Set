@@ -2,6 +2,7 @@ rule VSOCKpuppet {
     meta:
         author = "RussianPanda"
         description = "Detects VSOCKpuppet payload"
+	reference = "https://www.huntress.com/blog/esxi-vm-escape-exploit"
         hash = "c3f8da7599468c11782c2332497b9e5013d98a1030034243dfed0cf072469c89"
         date = "12/31/2025"
     strings:
